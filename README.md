@@ -1,5 +1,5 @@
 # MSP430_MCP9600
-Ready to go driver for mcp9600 thermocouple sensor
+Ready to go driver for mcp9600 thermocouple sensor implemented on MSP430G2553 (TI's lauchpad)
 
 There two lcd's used:
 https://www.sparkfun.com/products/14073
