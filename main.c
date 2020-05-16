@@ -7,8 +7,10 @@
 #include <stdint.h>
 #include <debug.h>
 #include <usci_settings.h>
+
 typedef unsigned short uint16;
 typedef unsigned long uint32;
+
 #define TRUE 1
 #define FALSE 0
 
@@ -100,9 +102,9 @@ void initI2C(void)
     //UCB0BR1 = 0;
 
     /* 50khz SCK */
-    UCB0BR0 = 0x40; //0x40; //160;    /* 10khz clk */ // fSCL = SMCLK/160 = ~100kHz
-    UCB0BR1 = 0x1;  //0x6;  //0;
-    /* Bit clock prescaler setting. The 16-bit value of (UCBxBR0 + UCBxBR1 × 256) */
+    UCB0BR0 = 0x40; 
+    UCB0BR1 = 0x1;
+    /* Bit clock prescaler setting. The 16-bit value of (UCBxBR0 + UCBxBR1 Ã— 256) */
 
     UCB0I2CSA = SLAVE_ADDR;                   // Slave Address
     UCB0CTL1 &= ~UCSWRST;                     // Clear SW reset, resume operation
@@ -167,12 +169,8 @@ void delay_ms(unsigned int delay)
     while (delay--)
     {
         __delay_cycles(16000);  //1ms = 1000 cycles per 1Mhz clock freq.
-        //__delay_cycles(1000);  //1ms = 1000 cycles per 1Mhz clock freq.
     }
 }
-
-
-
 
 /*****************************************************************************/
 /*                                SYNOPSIS                                   */
@@ -251,14 +249,6 @@ int main(void)
     float rounded_down=0;
     int truncated=0;
     uint8_t i=0, success=0, update=0, weird=0;
-    /*uint8_t t_ReceiveBuffer[MAX_BUFFER_SIZE] = {0};
-    uint8_t t_ReceiveBuffer2[MAX_BUFFER_SIZE] = {0};
-    uint8_t t_RXByteCtr = 0;
-    uint8_t t_ReceiveIndex = 0;
-    uint8_t t_TransmitBuffer[MAX_BUFFER_SIZE] = {0};
-    uint8_t t_SlaveType2 [TYPE_2_LENGTH] = {0};
-    uint8_t t_SlaveType1 [TYPE_1_LENGTH] = {0};
-    uint8_t t_SlaveType0 [TYPE_0_LENGTH] = {0};*/
     uint8_t version[3]={0};
     uint8_t status[1]={0};
     uint8_t adc_val[4]={0};
@@ -268,7 +258,6 @@ int main(void)
     uint8_t delta_junc[4]={0};
     char s[10];
     char temperature[10];
-
     char a[10]={};
     char* p=&a;
 
@@ -276,9 +265,9 @@ int main(void)
     //_cols = 16;
     //_rows = 2;
 
-    WDTCTL = WDTPW | WDTHOLD;                 // Stop watchdog timer
-                          // Setup I/O for UART and switch
-                     //
+    WDTCTL = WDTPW | WDTHOLD;   // Stop watchdog timer
+                                // Setup I/O for UART and switch
+     
      //   P1SEL = P1SEL2 = TXD;
     initClockTo16MHz();
     initGPIO();
@@ -299,6 +288,7 @@ int main(void)
     I2C_Master_WriteReg(SLAVE_ADDR, THERM_SENS_CFG_REG_ADDR, MasterType0, 1);
     delay_ms(100);
 
+    /* MCP Settings */
     set_filt_coefficients(FILT_MID);
     delay_ms(100);
     set_cold_junc_resolution(COLD_JUNC_RESOLUTION_0_625);
@@ -374,7 +364,6 @@ int main(void)
         {
             if ((s[i] < '0') || (s[i] > '9'))
                 s[i] = ' ';
-
         }
 
         /* Negative Temp Handle */
@@ -430,7 +419,6 @@ int main(void)
     }
 
     /* You can use below routines if you ve AT24 EEPROM */
-
     //void I2C_Write_EEProm(unsigned char slave_address, unsigned int memory_address, char * data, unsigned char DataLength )
     //I2C_Write_EEProm(SLAVE_ADDR, 0x00, "ABCDEFGHIJKLMNOP", 16);
 
