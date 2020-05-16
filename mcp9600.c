@@ -9,7 +9,7 @@
 /*  used for any purpose other than that for which they                      */
 /*  are supplied and must not be copied in whole or in                       */
 /*  part, or disclosed to others without the prior                           */
-/*  written consent of Delphi Diesel Systems Ltd.  Any copy                  */
+/*  written consent of ********************* Ltd.  Any copy                  */
 /*  of this document made by any method must also contain a                  */
 /*  copy of this legend.                                                     */
 /*                                                                           */
@@ -32,7 +32,7 @@ float readADC(uint8_t *data)
     float temp;
 
     //Serial.printf("Data[0] = %i, Data[1] = %i \n", data[0], data[1]);
-//  (UpperByte x 16 + LowerByte/16) – 4096
+//  (UpperByte x 16 + LowerByte/16) â€“ 4096
     if((data[0] & 0x80) == 0x80)
     {
         //data[0] = data[0] & 0x7F;
