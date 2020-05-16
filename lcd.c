@@ -9,7 +9,7 @@
 /*  used for any purpose other than that for which they                      */
 /*  are supplied and must not be copied in whole or in                       */
 /*  part, or disclosed to others without the prior                           */
-/*  written consent of Delphi Diesel Systems Ltd.  Any copy                  */
+/*  written consent of **************************  Any copy                  */
 /*  of this document made by any method must also contain a                  */
 /*  copy of this legend.                                                     */
 /*                                                                           */
